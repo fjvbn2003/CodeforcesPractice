@@ -1,7 +1,8 @@
 #pragma GCC diagnostic ignored "-Wunused-result"
 #pragma GCC diagnostic ignored "-Wsign-compare"
+#pragma GCC diagnostic ignored "-Wunused-variable"
 
-#include <bits/stdc++.h>고생하셨습니다.ㅜ!!
+#include <bits/stdc++.h>
 using namespace std;
 void solve();
 int main(){
