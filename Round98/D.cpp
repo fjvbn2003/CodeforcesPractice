@@ -1,6 +1,5 @@
 #pragma GCC diagnostic ignored "-Wunused-result"
 #pragma GCC diagnostic ignored "-Wsign-compare"
-#pragma GCC diagnostic ignored "-Wunused-variable"
 
 #include <bits/stdc++.h>
 using namespace std;

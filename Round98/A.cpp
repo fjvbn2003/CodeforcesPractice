@@ -1,6 +1,5 @@
 #pragma GCC diagnostic ignored "-Wunused-result"
 #pragma GCC diagnostic ignored "-Wsign-compare"
-#pragma GCC diagnostic ignored "-Wunused-variable"
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -21,6 +20,17 @@ int main(){
     return 0;
 }
 void solve(){
+    int i,j, ans;
+    cin>>i>>j;
+    if(i>j){swap(i,j);}
+    ans = 0;
+    ans += i*2;
+    j-= i;
+    if(j){
+    ans += j*2;
+    ans-=1;
+    }
+    
 
-
+    cout <<ans<<endl;
 }
