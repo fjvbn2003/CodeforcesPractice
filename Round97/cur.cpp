@@ -7,9 +7,9 @@ void solve();
 int main(){
     ios_base::sync_with_stdio(false); 
     cin.tie(NULL); 
-    #ifdef hi 
+    #ifdef hi
     freopen("./input.txt","r",stdin);
-    freopen("./ouput.txt","w",stdout);
+    freopen("./output.txt","w",stdout);
     #endif 
     int test_case = 1;
     cin>> test_case;
