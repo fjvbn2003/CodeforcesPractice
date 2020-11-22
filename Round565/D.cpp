@@ -14,24 +14,61 @@ int main(){
     solve();
 
 }
-bool primes [2750132];
-
+int sieve [2750132];
 void solve(){
-    for(int i=2; i<2750132; i++) primes[i] = true;
+    //에라토스테네스의 채
+    for(int i=2; i<2750132; i++) sieve[i] = true;
     for(int i=2; i*i < 2750132; i++){
-        if(primes[i]){
+        if(sieve[i]){
             for(int k=i*i; k<2750132; k+=i){
-                primes[k] = false;
+                sieve[k] = false;
             }
         }
-        
     }
-    for(int i=1; i<2750132; i++){
-        if(primes[i]){
-            cout << i <<" ";
+    int k=1;
+    for(int i=2; i < 2750132; i++){
+        if(sieve[i]){sieve[i] = k; k++;}
+    }
+    long long  n,t;
+    cin>> n;
+    multiset<int> ms;
+    vector<int> ans;
+    for(int i=0; i<n*2; i++){
+        cin>> t;
+        ms.insert(t);
+    }
+    // for(auto i : ms){
+    //     cout<< i<<" ";
+    // }
+    // cout << endl;
+    while(!ms.empty()){
+        t = *(--ms.end());
+        //cout <<"maxt : "<<t<<endl;
+        ms.erase(--ms.end());
+        if(sieve[t]){
+            //cout <<"prime index : "<<sieve[t]<<endl;
+            ms.erase(ms.lower_bound(sieve[t]));
+            ans.push_back(sieve[t]);
+        }else{
+            int m = 1;
+            for(long long i=2; i*i<=t; i++){
+                if(t%i==0){m = t/i; break;}
+            }
+            //cout <<"greatest divisor : "<<m<<endl;
+            ms.erase(ms.lower_bound(m));
+            ans.push_back(t);
         }
     }
+    for(int i=0; i<ans.size(); i++){
+        cout << ans[i]<<" ";
+    }
+    // cout <<"sieve[i]"<<endl;
+    // for(int i=0; i<100; i++){
+    //     cout << sieve[i]<<" ";
+    // }
     cout <<endl;
+
+
 }
 /*
 다이나믹 프로그래밍과 그리디 알고리즘으로 좋은 문제.
