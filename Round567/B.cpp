@@ -10,17 +10,26 @@ int main(){
     cin.tie(NULL); 
     #ifdef hi
     freopen("./input.txt","r",stdin);
+    freopen("./output.txt","w",stdout);
     #endif 
-    int test_case = 1;
-    cin>> test_case;
-    while(test_case--){
-        solve();
-    }
+    solve();
     cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << endl; 
     return 0;
 }
 void solve(){
-
+    int n;
+    stirng s, s1, s2;
+    cin> n>>s;
+    int idx_r = n/2;
+    int idx_l = n/2;
+    while(s[i] !='0'){
+        idx_r++;
+    }
+    while(s[i] !='0'){
+        idx_l--;
+    }
+    if(idx_r)
+    
 
 }
 /*

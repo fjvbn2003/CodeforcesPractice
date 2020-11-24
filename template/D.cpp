@@ -9,7 +9,6 @@ int main(){
     cin.tie(NULL); 
     #ifdef hi
     freopen("./input.txt","r",stdin);
-    freopen("./output.txt","w",stdout);
     #endif 
     int test_case = 1;
     cin>> test_case;

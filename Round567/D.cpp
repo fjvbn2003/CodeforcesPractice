@@ -1,6 +1,5 @@
 #pragma GCC diagnostic ignored "-Wunused-result"
 #pragma GCC diagnostic ignored "-Wsign-compare"
-#pragma GCC diagnostic ignored "-Wunused-variable"
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -10,6 +9,7 @@ int main(){
     cin.tie(NULL); 
     #ifdef hi
     freopen("./input.txt","r",stdin);
+    freopen("./output.txt","w",stdout);
     #endif 
     int test_case = 1;
     cin>> test_case;
@@ -26,5 +26,5 @@ void solve(){
 /*
 Author: fjvbn2003
 Round: #
-problem: B.
+problem: D.
 */

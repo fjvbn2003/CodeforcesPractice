@@ -28,7 +28,7 @@ void solve(){
     }
     vector<int> seq(6);
     for(int i=0; i<n; i++){
-        if(a[i]==0){
+        if(a[i]==0){ // a[i]== 4
             seq[0]++;
         }else{
             if(seq[a[i]-1]>0){
