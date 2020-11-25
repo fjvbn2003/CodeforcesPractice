@@ -1,7 +1,7 @@
 #pragma GCC diagnostic ignored "-Wunused-result"
 #pragma GCC diagnostic ignored "-Wsign-compare"
 #pragma GCC diagnostic ignored "-Wunused-variable"
-#define ll long long 
+
 #include <bits/stdc++.h>
 using namespace std;
 void solve();
@@ -11,38 +11,32 @@ int main(){
     #ifdef hi
     freopen("./input.txt","r",stdin);
     #endif 
-    solve();
+    int test_case = 1;
+    cin>> test_case;
+    while(test_case--){
+        solve();
+    }
     cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << endl; 
     return 0;
 }
 void solve(){
-    ll x,y,z;
-    cin>> x>> y>> z;
-    ll cnt =0;
-    if(x>0){
-        cnt += x/z;
-        x %=z;
+    int n;
+    cin >>n;
+    vector<int> arr;
+    for(int i=1; i<=n; i++){
+        arr.push_back(i);
     }
-    if(y>0){
-        cnt += y/z;
-        y %=z;
+    reverse(arr.begin(), arr.end());
+    if(n%2 ==1){
+        swap(arr[n/2],arr[0]);
     }
-    ll r = 0;
-    if(x>y){
-        if(x+y >=z){
-            cnt++;
-            r = z-x;
-        }
-    }else{
-        if(x+y >=z){
-            cnt++;
-            r = z-y;
-        }
+    for(int i : arr){
+        cout << i<<" ";
     }
-    cout <<cnt <<" "<< r<<endl;
+    cout <<endl;
 }
 /*
 Author: fjvbn2003
-Round: # 567
+Round: #
 problem: A. 
 */
