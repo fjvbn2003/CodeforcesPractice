@@ -12,21 +12,6 @@ int main(){
     #ifdef hi
     freopen("./input.txt","r",stdin);
     #endif 
-for(int i=2; i<500000; i++){
-     primes[i] = true;
-}
-for(int i=2; i*i < 500000; i++){
-    if(primes[i]){
-        for(int k=i*i; k<500000; k+=i){
-            primes[k] = false;
-        }
-    }
-}
-for(int i=1; i<500000; i++){
-    if(primes[i]){
-        prime.push_back(i);
-    }
-}
     int test_case = 1;
     cin>> test_case;
     while(test_case--){

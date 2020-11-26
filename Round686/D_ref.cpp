@@ -69,7 +69,7 @@ void solve(){
 
 
 /*
-Author: fjvbn2003
+Author: MikeMirzayanov
 Round: #
 problem: D.
 */

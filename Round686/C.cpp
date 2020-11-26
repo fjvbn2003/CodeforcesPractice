@@ -24,23 +24,25 @@ void solve(){
     int n,t;
     set<int> s;
     cin>>n;
-    vector<int> arr(n+1);
-    vector<int> ans(n+1);
+    vector<int> arr(n+1,0);
+    vector<int> ans(n+1,0);
     for(int i=0; i<n; i++){
         cin>> t;
         arr[i] = t;
         s.insert(t);
         if(i==0){continue;}
         else{
-            if(i==n-1){
-                ans[arr[i]]--;
-            }
+            if(i== n-1){ans[arr[i]]--;}
             if(arr[i-1] != arr[i]){
                 ans[arr[i]]++;
             }
         }
     }
     int mini = 1e9;
+    // for(int i=1; i<=n; i++){
+    //     cout << ans[i]<<" ";
+    // }
+    // cout <<endl;
     for(int i=1; i<=n; i++){
         if(s.count(i) && mini > ans[i]){
             mini = ans[i];

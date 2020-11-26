@@ -23,25 +23,21 @@ void solve(){
     int n,t;
     vector<int> arr;
     vector<pair<int,int> > arr2;
-    multiset<int > s;
-    set<int> s2;
+    multiset<int > ms;
+    set<int> s;
     
     cin>>n;
     //cout <<"n: "<< n<<endl;
     for(int i=0; i<n; i++){
         cin>>t;
+        ms.insert(t);
         s.insert(t);
-        s2.insert(t);
         arr.push_back(t);
     }
-    for(auto i: s2){
-        arr2.push_back({s.count(i), i});
+    for(auto val: s){
+        arr2.push_back({ms.count(val), val});
     }
     sort(arr2.begin(), arr2.end());
-    // for(pair<int,int> i : arr2){
-    //     cout <<i.first <<" "<<i.second<<" " ;
-    // }
-
     if(arr2[0].first == 1){
         int idx = -1;
         for(int i=0; i< arr.size(); i++){
