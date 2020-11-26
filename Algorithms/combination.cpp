@@ -41,7 +41,6 @@ int main (){
 				printf("%d ", n[i]);
 			}
 		}
-
 		printf("\n");
 
 	}while(next_permutation(ind.begin(), ind.end()));
