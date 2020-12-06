@@ -14,8 +14,7 @@ int main() {
     ofstream fout ("friday.out");
     ifstream fin ("friday.in");
     int n;
-    int year = 1900;
-    int th = 1;
+    int year = 1900; // 시작년도
     int days ;
     int c = 2;
     vector<int> arr(7,0);
