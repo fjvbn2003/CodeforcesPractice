@@ -13,8 +13,8 @@ int worst = 1234567890;
 
 void bf(vector<int> ops, int remain, int val){
     if(remain ==0){
-        best = max(best,val );
-        worst = min(worst, val);
+        best = max(best,val);
+        worst = min(worst,val);
         return;
     }
     for(int i=0; i<4; i++){

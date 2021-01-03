@@ -3,7 +3,6 @@
 #include <algorithm>
 
 using namespace std;
-
 int main(){
     int n, t;
     int digits = 0;
@@ -28,5 +27,4 @@ int main(){
     }
     cout <<0<<endl;
     return 0;
-
 }

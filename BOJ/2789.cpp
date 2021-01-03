@@ -21,17 +21,16 @@ int main(){
     }
     sort(bi.begin(), bi.end());
     int best = -1;
-do{
-    int s = 0;
-    for(int i=0; i<n; i++){
-        if(bi[i]==1){
-            s+=arr[i];
-        }
+    do{
+        int s = 0;
+        for(int i=0; i<n; i++){
+            if(bi[i]==1){
+                s+=arr[i];
+            }
     }
     if(s<=m){
-best = max(best, s);
+        best = max(best, s);
     }
-    
 }
 while(next_permutation(bi.begin(), bi.end()));
 cout <<best<<endl;
