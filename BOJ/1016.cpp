@@ -3,35 +3,35 @@
 #include <cmath>
 using namespace std;
 #define ll long long
-// bool prime[1000001];
-// ll arr[1000001];
-
+bool nonono[1000001];
 int main(){
     ll a,b;
     cin>> a>>b;
-    // prime[1] = true;
-    // for(int i=2; i*i<1000001; i+=1){
-    //     if(!prime[i]){
-    //         for(int j=i*2; j<1000001; j+=i){
-    //             prime[j] = true;
-    //         }
-    //     }
-    // }
-    int cnt = 0;
-    ll m = (ll)sqrt(b);
     
-    for(ll i = a; i<=b; i++){
-        for(ll j=2; j<=m; j++ ){
-            
-            if(j*j == i){cnt++; break;}
-            if(i%j==0){break;}
+    for(ll i=2; i*i<=b; i++){
+        ll s = a/(i*i);
+        if(a%(i*i) !=0){
+            s++;
+        }
+        // if(nonono[s*i*i -a]){
+        //     continue;
+        // }
+    //cout <<a <<" "<<b<<endl;
+        for(ll j=s; j*i*i <=b; j++){
+            //cout << j*i*i<<" ";
+            //cout << j*i*i - a<<" ";
+            //cout <<endl;
+            nonono[j*i*i -a] = true;
         }
     }
-    if(a==1){
-        cout << b-a-cnt<<endl;
-        return 0;
+
+    int cnt = 0;
+    
+    for(ll i=a; i<=b; i++){
+        //cout << nonono[i-a]<<" ";
+        if(!nonono[i-a]) cnt++;
     }
-    cout << b-a+1-cnt<<endl;
+    cout <<cnt<<endl;
     return 0;
 
 }
