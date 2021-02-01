@@ -14,7 +14,6 @@ int main(){
     int before = -1;
     for(int i=0; i<a.size(); i++){
         if(arr[a[i]-'a'] <= before){
-            //cout << a[i]<<endl;
             ans++;
         }
         before = arr[a[i]-'a'];

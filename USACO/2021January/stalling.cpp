@@ -10,7 +10,7 @@ long long solve(int idx, int bitset){
     if(idx==n && bitset== (1<<n)-1){
         return 1;
     }
-    if(dp[idx][bitset]) return dp[idx][bitset];
+    if(dp[idx][bitset] != -1) return dp[idx][bitset];
     long long ret = 0;
     for(int i=0; i<height.size(); i++){
         if(((1<<i)&bitset)==0 && cows[idx]<=height[i]){
@@ -23,6 +23,11 @@ long long solve(int idx, int bitset){
 int main(){
     int t;
     cin>>n;
+    for(int i=0; i<21; i++){
+        for(int j=0; j<1048577; j++){
+            dp[i][j] = -1;
+        }
+    }
     for(int i=0; i<n; i++){
         cin>> t;
         cows.push_back(t);
