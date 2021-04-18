@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-
 int main(){
     char name[5][7];
     int arr[5][4];
@@ -72,16 +71,5 @@ int main(){
     }
     printf("----------------------------------------\n");
     printf("%8s%8s%8s%8s\n","1/4","2/4","3/4","4/4");
-
-    // for(int i=0; i<4; i++){
-    //     printf("%d ", avg_percentile[i]);    
-    // }
-
-    // for(int i=0; i<5; i++){
-    //     for(int j=0; j<4; j++){
-    //         printf("%d ", arr[i][j]);
-    //     }
-    //     printf("\n");
-    // }
     return 0;
 }
