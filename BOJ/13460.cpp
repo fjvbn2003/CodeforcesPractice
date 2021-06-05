@@ -2,131 +2,106 @@
 #include <string>
 #include <vector>
 using namespace std;
-char arr[11][11];
+char grid[11][11];
 int n,m;
 int ans = 11;
-// 0: east, 1:south, 2:west, 3:north
-int dy[4] = {0,1,0,-1};
-int dx[4] = {1,0,-1,0};
-pair<int, int> blue = {0,0};
-pair<int, int> red = {0,0};
-pair<int, int> hole = {0,0};
+int dy[4] = {1,0,-1,0};
+int dx[4] = {0,1,0,-1};
+// if return value is '0' means normal case (no one is in the hole)
+// if return value is  '1' means red is hole 
+// if return value is  '2' means blue is hole 
 
-// 1:success 2:goal 3:dont_move 4:blue_hole
-// need to implement carefully move function
-int move(int dir){
-    int blue_y = blue.first;
-    int blue_x = blue.second;
-    int red_y = red.first;
-    int red_x = red.second;
-    
-    while(true){
-        blue_y += dy[dir];
-        blue_x += dx[dir];
-        if(arr[blue_y][blue_x]=='#'){
-            blue_y -= dy[dir];
-            blue_x -= dx[dir];
-            break;
-        }
-        if(arr[blue_y][blue_x]=='O'){
-            return 4;
-        }
-    }
-    while(true){
-        red_y += dy[dir];
-        red_x += dx[dir];
-        if(arr[red_y][red_x]=='#'){
-            red_y -= dy[dir];
-            red_x -= dx[dir];
-            break;
-        }
-        if(arr[red_y][red_x]=='O'){
-            //for debugging
-            for(int i=0;i<n; i++){
-                for(int j=0; j<m; j++){
-                    cout<<arr[i][j];
-                }
-                cout <<endl;
-            }
-            cout <<endl<<endl;
-                
+int move(int dir, pair<int,int> &red, pair<int, int> &blue){
+    // blue
 
-            return 2;
+    int ny = blue.first + dy[dir];
+    int nx = blue.second + dx[dir];
+    int dist_b = 0;
+    while(grid[ny][nx] != '#' && grid[ny][nx] != 'O'){
+        blue.first  = ny;
+        blue.second = nx;
+        dist_b++;
+        //cout << "blue: "<<blue.first<<" "<<blue.second<<endl;
+        //cout<< grid[ny][nx]<<endl;
+        ny = blue.first + dy[dir];
+        nx = blue.second + dx[dir];
+    }
+    if(grid[ny][nx] == 'O' ){
+        return 2;
+    }
+
+
+    // red
+    ny = red.first + dy[dir];
+    nx = red.second + dx[dir];
+    int dist_r = 0;
+    while(grid[ny][nx] != '#' && grid[ny][nx] != 'O'){
+        red.first  = ny;
+        red.second = nx;
+        dist_r++;
+        ny = red.first + dy[dir];
+        nx = red.second + dx[dir];
+    }
+    if(grid[ny][nx] == 'O' ){
+        return 1;
+    }
+    if(blue.first == red.first && red.second == blue.second){
+        if(dist_b>dist_r){
+            blue.first-= dy[dir];
+            blue.second-= dx[dir];
+        }else if(dist_b<dist_r){
+            red.first -= dy[dir];
+            red.second -= dx[dir];
         }
     }
-    if(red_y == blue_y && red_x == blue_y){
-        if(dir == 0 || dir == 2){
-            if(blue.second < red.second){
-                blue_y -= dy[dir];
-                blue_x -= dx[dir];
-            }else{
-                red_y -= dy[dir];
-                red_x -= dx[dir];
-            }
-        }else{
-            if(blue.first < red.first){
-                blue_y -= dy[dir];
-                blue_x -= dx[dir];
-            }else{
-                red_y -= dy[dir];
-                red_x -= dx[dir];
-            }
-        }
-    }
-    if(blue.first == blue_y && blue.second == blue_x && red.first == red_y && red.second == red_x){
-        return 3;
-    }
-    // arr[blue.first][blue.second] = '.';
-    // arr[red.first][red.second] = '.';
-    arr[blue_y][blue_x] = 'B';
-    arr[red_y][red_x] = 'R';
-    blue.first = blue_y;
-    blue.second = blue_x;
-    red.first = red_y;
-    red.second = red_x;
-    return 1;
+    //cout << "red: "<<red.first<<" "<<red.second<<endl;
+    return 0;
+
 }
-void brute(int times){
-    if(times>=10) return;
-    int blue_y = blue.first;
-    int blue_x = blue.second;
-    int red_y = red.first;
-    int red_x = red.second;
+
+// times번째 dir 방향으로 기울였을 때
+void bf(int times, int dir, pair<int,int> red, pair<int, int> blue){
+    if(times>=10){return;}
+    //cout <<"in bf: "<< "times"<<times<<" dir: "<<dir<<endl;
+    int t = move(dir, red, blue);
+    if(t == 0){
+
+    }else if(t == 1){
+        ans = min(ans, times+1);
+        return;
+    }else{
+        return;
+    }
     for(int i=0; i<4; i++){
-        int t = move(i);
-        if(t==1){
-            brute(times+1);
-        }else if(t==2){
-            if(ans>times+1) ans = times+1;
-        }
-
-        // return original position
-        blue.first = blue_y;
-        blue.second = blue_x;
-        red.first = red_y;
-        red.second = red_x;
-        arr[blue_y][blue_x] = 'B';
-        arr[red_y][red_x] = 'R';
+        bf(times+1, i, red, blue);
     }
-    return ;
+    return;
 }
-
 
 int main(){
-    string s;
+    pair<int,int> red;
+    pair<int, int> blue;
     cin>>n>>m;
-    for(int i=0;i<n; i++){
-        cin>> s;
+    for(int i=0; i<n; i++){
         for(int j=0; j<m; j++){
-            arr[i][j] = s[j];
-            if(s[j]=='B') blue = {i,j};
-            if(s[j]=='R') red = {i,j};
-            if(s[j]=='O') hole = {i,j};
+            cin>> grid[i][j];
+            if(grid[i][j] == 'R'){
+                red.first = i;
+                red.second=j;
+                grid[i][j] = '.';
+            } 
+            if(grid[i][j] == 'B'){
+                blue.first = i;
+                blue.second = j;
+                grid[i][j] = '.';
+            }
         }
     }
-    brute(0);
+    for(int i=0; i<4; i++){
+        bf(0, i, red, blue);
+    }
     if(ans == 11){
-        cout <<-1<<endl;;
+        cout <<-1<<endl;
     }else{
         cout <<ans<<endl;
     }
