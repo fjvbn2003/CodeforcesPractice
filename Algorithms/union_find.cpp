@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-#define MAX 100
+#define MAX 100001
 int Parent[MAX];
 int Find_Parent(int x){
     if(Parent[x] == x) return x;
