@@ -12,6 +12,20 @@ struct segtree{
   }
   // lx는 노드 x가 담당하는 왼쪽 경계,rx는 오른쪽 경계
   // i는 우리가 생각하는 인덱스, x는 segment tree에서의 index
+  void build(vector<int> &a, int x, int lx, int rx){
+    if(rx-lx == 1){
+      if(lx < (int)a.size())
+        sums[x] = a[lx];
+      return ;
+    }
+    int m = (lx+rx)/2;
+    build(a, 2*x+1, lx,m);
+    build(a, 2*x+2, m, rx);
+    sums[x] = sums[2*x+1]+sums[2*x+2];
+  }
+  void build(vector<int> &a){
+    build(a, 0,0,size);
+  }
   void set(int i, int v, int x, int lx, int rx){
     if(rx - lx == 1){
       sums[x] = v;
@@ -46,11 +60,11 @@ int main(){
   cin>>n>>m;
   segtree st;
   st.init(n);
+  vector<int> arr(n,0);
   for(int i=0; i<n; i++){
-    int v;
-    cin>>v;
-    st.set(i, v);
+    cin>> arr[i];
   }
+  st.build(arr);
   int op, a,b;
   for(int i=0; i<m; i++){
     cin>>op>>a>>b;
