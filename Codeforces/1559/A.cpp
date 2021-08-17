@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <tuple>
 #define fio                    \
   ios::sync_with_stdio(false); \
   cin.tie(0);                  \
