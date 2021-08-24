@@ -8,4 +8,6 @@ int main(){
     cout <<"원래 문자열: "<< s<<endl;
     cout << "s.substr(2,3): "<< s1<<endl;
     cout << "s.substr(1): "<< s2<<endl;
+
+    cout << "s.substr(10): "<<s.substr(6)<<endl;
 }
