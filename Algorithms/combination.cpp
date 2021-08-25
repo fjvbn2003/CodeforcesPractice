@@ -1,19 +1,29 @@
 #include <stdio.h>
 #include <vector>
 #include <algorithm>
-
+#include <string>
 using namespace std;
+// string combination
+vector<string> t;
+void comb(string s, int idx, string ret){
+  if(s.size()==idx){
+    t.push_back(ret);
+    return;
+  };
+  comb(s, idx+1, ret+s[idx]);
+  comb(s, idx+1, ret);
+  return;
+}
+
 
 int main (){
 
 	// 1부터 6까지 담을 벡터
 	vector<int> n;
-
 	// 1부터 6까지 생성
 	for(int i=0; i<6; i++){
 		n.push_back(i+1);
 	}
-
 	// 0과1을 저장 할 벡터 생성
 	vector<int> ind;
 
