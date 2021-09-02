@@ -13,12 +13,7 @@ int main(){
     arr[i][1] = 1;
   for(int i=1; i<=n; i++){
     for(int j=2; j<=k; j++){
-      long long t = 0;
-      for(int l=0; l<=i; l++){
-        t += arr[l][j-1];
-        t = t%MOD;
-      }
-      arr[i][j] = t;
+      arr[i][j] = (arr[i-1][j]+arr[i][j-1])%MOD;
     }
   }
   // for(int i=0; i<=n; i++){
