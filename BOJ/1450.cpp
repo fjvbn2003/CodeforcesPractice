@@ -1,19 +1,55 @@
 #include <iostream>
 #include <vector>
+#include <map>
+#include <algorithm>
 using namespace std;
+vector<int> arr;
+vector<long long> cand;
+long long n,c,t;
+long long ans = 0;
+void print_arr(vector<long long> & arr){
+  for(auto t : arr)
+  {
+    cout << t<<" ";
+  }
+  cout <<endl;
+  return ;
+}
 
+int dfs(int start, int end, long long s){
+  if(start==end){
+    cand.push_back(s);
+    return 0;
+  }
+  dfs(start+1, end, s);
+  dfs(start+1, end, s+arr[start]);
+  return 0;
+}
+int dfs2(int start, int end, long long s){
+  if(start==end){
+    if(s>c) return 0;
+    else{
+      long long remain  = c-s;
+      ans += upper_bound(cand.begin(), cand.end(), remain)-cand.begin();
+      return 0;
+    }
+  }
+  dfs2(start+1, end, s);
+  dfs2(start+1, end, s+arr[start]);
+  return 0;
+}
 int main(){
-
-  int n,c;
   cin>>n>>c;
-  vector<int> arr(n,0);
-  for(int i=0; i<n; i++)
-    cin>>arr[i];
+  for(int i=0; i<n; i++){
+    cin>>t;
+    arr.push_back(t);
+  }
+  dfs(0, n/2, 0);
+  //print_arr(cand);
+  sort(cand.begin(), cand.end());
+  dfs2(n/2, n, 0);
+  //print_arr(cand);
 
-  //dp[i][j] i번 째 물건까지 고려했을 때 j 무게로 살 수 있는 방법의 수
-  //dp[i][j] = max(dp[i-1][j], dp[i-1][j-arr[i]]+1
-  //탐색공간이 너무 넓다. 
-  // Meet in the middle을 사용해야 한다!
-  
-
+  cout << ans<<endl;
+  return 0;
 }
