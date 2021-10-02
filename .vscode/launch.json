@@ -5,6 +5,13 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "java",
+      "name": "Launch test",
+      "request": "launch",
+      "mainClass": "java_algorithm.test",
+      "projectName": "CodeforcesPractice_a5abc53"
+    },
+    {
       "name": "(lldb) 시작",
       "type": "cppdbg",
       "request": "launch",
@@ -16,6 +23,5 @@
       "externalConsole": false,
       "MIMode": "lldb"
     }
-  
   ]
 }
