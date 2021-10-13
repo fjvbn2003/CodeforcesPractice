@@ -1,17 +1,16 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-
+#include <string>
 using namespace std;
 
 //-> 비트마스크로 풀려고 했지만 실패.
 
 int bit_count(int bit){
-  int t = bit;
   int ret = 0;
-  while(t){
-    ret += t%2;
-    t/=2;
+  while(bit){
+    ret += bit%2;
+    bit/=2;
   }
   return ret;
 }
@@ -23,19 +22,33 @@ int main(){
   int original = 0;
   vector<vector<bool> > doors(m, vector<bool>(n, false));
   char bit;
+  string s;
+  cin>>s;
+
+  // 첫 줄 입력
   for(int i=0; i<n; i++){
-    cin>> bit;
-    arr[i] = (bit=='0') ?false: true;
+    bit = s[i];
+    if(bit=='0'){
+      arr[i] = false;
+    }else{
+      arr[i] = true;
+    }
     if(arr[i])
       original |= (1<<i);
   }
-
+  // m개 줄 입력.
   for(int i=0; i<m; i++){
+    cin>> s;
     for(int j=0; j<n; j++){
-      cin>>bit;
-      doors[i][j] = (bit=='0') ?false: true;
+      bit = s[j];
+      if(bit=='0'){
+        doors[i][j] = false;
+      }else{
+        doors[i][j] = true;
+      }
     }
   }
+
   // -n, -n+1 -n+2 .. 0 +1 +2 .. +n
   // ans[i] ==  i를 만들기 위해서 필요한 스위치 동작.
   vector<int> ans(2*n+1, -1);
@@ -45,11 +58,12 @@ int main(){
     //cout <<"i: "<<i<<endl;
     int tmp = original;
     for(int j=0; j<m; j++){
-      // 만약 j번 비트가 켜져있다면 누른다.
+      // 만약 j번 비트가 켜져있다면 j번 째 버튼을 누른다.
       if(i&(1<<j)){
         //cout <<"hi j: "<<j<<endl;
         for(int k=0; k<doors[j].size(); k++){
           if(doors[j][k]){
+            //tmp의 k 번 째 비트 반전.
             tmp ^= (1<<k);
             //cout <<"tmp: "<<tmp<<endl;
           }
@@ -57,15 +71,12 @@ int main(){
       }      
     }
     int one_cnt = bit_count(tmp);
-    int val = one_cnt-(n-one_cnt)+n;
+    int zero_cnt = n-one_cnt;
+    int val = one_cnt-zero_cnt+n;
     // cout <<"one_count: "<<one_cnt<<endl;
     // cout <<"val: "<<val<<endl;
     // cout <<"tmp: "<<tmp<<endl;
-    if(ans[val] ==-1){
-      ans[val] = i;
-    }else{
-      continue;
-    }
+    ans[val] = i;
     // cout <<"hi"<<endl;
   }
   // for(int i=0; i<ans.size(); i++){
