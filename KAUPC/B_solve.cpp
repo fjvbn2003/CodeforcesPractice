@@ -8,6 +8,7 @@
 #include <set>
 #include <iostream>
 #include <map>
+
 using namespace std;
 
 int num[105][50005] = { 0, };
