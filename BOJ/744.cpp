@@ -14,7 +14,8 @@ for(int i=2; i*i < 10000; i++){
         // 범위 내에 있는 k의 배수들을 모조리 false로 체크한다.
         for(int k=i*i; k<10000; k+=i){
             primes[k] = false;
-            #this is test branch
+            //this is test branch
+            //this ist test2 branch
         }
     }
     
