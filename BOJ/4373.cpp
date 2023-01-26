@@ -44,8 +44,9 @@ int main(){
             }
             for(int i=0; i<n; i++){
                 for(int j=i+1; j<n; j++){
-                    dc_pair.push_back({S[i],S[j]});
                     dc_pair.push_back({S[j],S[i]});
+                    dc_pair.push_back({S[j],S[i]});
+
                 }
             }
             // ab_pair는 합으로 정렬
@@ -69,12 +70,14 @@ int main(){
                     left_idx++;
                 }else{ // left_sum == right_diff
                     //cout << "left_idx: "<< left_idx<<" left_sum: "<<left_sum <<" right_idx: "<<right_idx<<" right_diff: "<< right_diff<<endl;
-                    if(ab_pair[left_idx].first == dc_pair[right_idx].first || ab_pair[left_idx].first == dc_pair[right_idx].second || ab_pair[left_idx].second == dc_pair[right_idx].first ||ab_pair[left_idx].second == dc_pair[right_idx].second){
-                       right_idx++;
-                        continue;
+                    if(ab_pair[left_idx].first != dc_pair[right_idx].first &&  ab_pair[left_idx].first != dc_pair[right_idx].second && ab_pair[left_idx].second != dc_pair[right_idx].first && ab_pair[left_idx].second != dc_pair[right_idx].second){
+                        ans = max(ans,dc_pair[right_idx].first);
                     }
-                    ans = dc_pair[right_idx].first;
-                    right_idx++;   
+                    if(left_idx < right_idx){
+                        left_idx++;
+                    }else{
+                        right_idx++;
+                    }
                 }
             }
 
