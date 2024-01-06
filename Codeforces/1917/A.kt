@@ -6,13 +6,16 @@ fun main(){
         var n = readLine()!!.toInt()
         var arr = readLine()!!.split(" ").map{it.toInt()}
         var num_minus = 0
-        var minmum_num = -1234567890
+        var num_zeros = 0
         for(i in 0..n-1){
             if(arr[i] <0){
                 num_minus++
             }
+            if(arr[i] == 0){
+                num_zeros++
+            }
         }
-        if(num_minus%2 ==1){
+        if(num_minus%2 ==1 ||  num_zeros>0){
             println(0)
         }else{
             println(1)
